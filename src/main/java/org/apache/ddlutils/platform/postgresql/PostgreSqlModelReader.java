@@ -19,6 +19,7 @@ package org.apache.ddlutils.platform.postgresql;
  * under the License.
  */
 
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.HashMap;
@@ -28,8 +29,11 @@ import org.apache.ddlutils.Platform;
 import org.apache.ddlutils.model.Column;
 import org.apache.ddlutils.model.ForeignKey;
 import org.apache.ddlutils.model.Index;
+import org.apache.ddlutils.model.IndexColumn;
+import org.apache.ddlutils.model.NonUniqueIndex;
 import org.apache.ddlutils.model.Table;
 import org.apache.ddlutils.model.TypeMap;
+import org.apache.ddlutils.model.UniqueIndex;
 import org.apache.ddlutils.platform.DatabaseMetaDataWrapper;
 import org.apache.ddlutils.platform.JdbcModelReader;
 
@@ -238,4 +242,61 @@ public class PostgreSqlModelReader extends JdbcModelReader
         return (table.getName() + "_pkey").equals(index.getName());
     }
 
+    
+    /**
+     * Reads the next index spec from the result set.
+     * 
+     * @param metaData     The database meta data
+     * @param values       The index meta data as defined by {@link #getColumnsForIndex()}
+     * @param knownIndices The already read indices for the current table
+     */
+    protected void readIndex(DatabaseMetaDataWrapper metaData, Map values, Map knownIndices) throws SQLException
+    {
+        Short indexType = (Short)values.get("TYPE");
+
+        // we're ignoring statistic indices
+        if ((indexType != null) && (indexType.shortValue() == DatabaseMetaData.tableIndexStatistic))
+        {
+        	return;
+        }
+        
+        String indexName = (String)values.get("INDEX_NAME");
+
+        if (indexName != null)
+        {
+	        Index index = (Index)knownIndices.get(indexName);
+	
+	        if (index == null)
+	        {
+	            if (((Boolean)values.get("NON_UNIQUE")).booleanValue())
+	            {
+	                index = new NonUniqueIndex();
+	            }
+	            else
+	            {
+	                index = new UniqueIndex();
+	            }
+
+	            index.setName(indexName);
+	            knownIndices.put(indexName, index);
+	        }
+	
+	        IndexColumn indexColumn = new IndexColumn();
+	        
+	        String columnName = (String)values.get("COLUMN_NAME");
+	        
+	        if (columnName.indexOf("\"") != -1) {
+	            columnName = columnName.replaceAll("\"", "");
+	        }
+	
+	        indexColumn.setName(columnName);
+	        
+	        if (values.containsKey("ORDINAL_POSITION"))
+	        {
+	            indexColumn.setOrdinalPosition(((Short)values.get("ORDINAL_POSITION")).intValue());
+	        }
+	        
+	        index.addColumn(indexColumn);
+        }
+    }
 }

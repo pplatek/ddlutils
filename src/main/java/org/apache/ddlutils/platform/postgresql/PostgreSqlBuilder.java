@@ -20,6 +20,7 @@ package org.apache.ddlutils.platform.postgresql;
  */
 
 import java.io.IOException;
+import java.sql.Types;
 import java.util.Map;
 
 import org.apache.ddlutils.Platform;
@@ -220,5 +221,28 @@ public class PostgreSqlBuilder extends SqlBuilder
         {
             printIdentifier(getColumnName(sourceColumn));
         }
+    }
+    
+    /**
+     * Returns the native default value for the column.
+     * 
+     * @param column The column
+     * @return The native default value
+     */
+    protected String getNativeDefaultValue(Column column)
+    {
+	String defaultValue = column.getDefaultValue();
+	
+	boolean isBit = column.getTypeCode() == Types.BIT;
+	
+	if (isBit) {
+	    Object parsedDefaultValue = column.getParsedDefaultValue();
+	    
+	    if (parsedDefaultValue != null) {
+		defaultValue = parsedDefaultValue.toString().toUpperCase();
+	    }
+	}
+	
+        return defaultValue;
     }
 }
