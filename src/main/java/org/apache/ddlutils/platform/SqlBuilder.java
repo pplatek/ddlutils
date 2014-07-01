@@ -625,7 +625,7 @@ public abstract class SqlBuilder
                 print(" UNIQUE");
             }
             print(" INDEX ");
-            printIdentifier(getIndexName(index));
+            printIdentifier(getIndexName(table, index));
             print(" ON ");
             printIdentifier(getTableName(table));
             print(" (");
@@ -1794,6 +1794,18 @@ public abstract class SqlBuilder
     {
         return shortenName(index.getName(), getMaxConstraintNameLength());
     }
+    
+    public String getIndexName(Table table, Index index)
+    {
+	String tableName = getTableName(table);
+        String indexName = getIndexName(index);
+        
+        if (getPlatformInfo().isTableNameInIndexes() && !indexName.contains(tableName)) {
+    		indexName = tableName + "_" + indexName;
+        }
+        
+        return indexName;
+    }
 
     /**
      * Writes the indexes embedded within the create table statement.
@@ -1868,7 +1880,7 @@ public abstract class SqlBuilder
             writeTableAlterStmt(table);
         }
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         if (!getPlatformInfo().isAlterTableForDropUsed())
         {
             print(" ON ");

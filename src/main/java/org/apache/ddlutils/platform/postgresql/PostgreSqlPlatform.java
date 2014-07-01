@@ -102,6 +102,8 @@ public class PostgreSqlPlatform extends PlatformImplBase
 
         setSqlBuilder(new PostgreSqlBuilder(this));
         setModelReader(new PostgreSqlModelReader(this));
+        
+        info.setTableNameInIndexes(true);
     }
 
     /**

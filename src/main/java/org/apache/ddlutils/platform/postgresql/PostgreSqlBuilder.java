@@ -80,7 +80,7 @@ public class PostgreSqlBuilder extends SqlBuilder
     public void dropIndex(Table table, Index index) throws IOException
     {
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

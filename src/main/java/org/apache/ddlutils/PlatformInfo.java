@@ -70,6 +70,8 @@ public class PlatformInfo
 
     /** Whether indices are embedded inside the create table statement. */
     private boolean _indicesEmbedded = false;
+    
+    private boolean _tableNameInIndexes = false;
 
     /** Whether identity specification is supported for non-primary key columns. */
     private boolean _nonPrimaryKeyIdentityColumnsSupported = true;
@@ -407,6 +409,14 @@ public class PlatformInfo
     public void setIndicesEmbedded(boolean indicesEmbedded)
     {
         _indicesEmbedded = indicesEmbedded;
+    }
+    
+    public boolean isTableNameInIndexes() {
+	return _tableNameInIndexes;
+    }
+
+    public void setTableNameInIndexes(boolean _tableNameInIndexes) {
+	this._tableNameInIndexes = _tableNameInIndexes;
     }
 
     /**
