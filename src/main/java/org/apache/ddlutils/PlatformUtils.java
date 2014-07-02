@@ -37,6 +37,7 @@ import org.apache.ddlutils.platform.hsqldb.HsqlDbPlatform;
 import org.apache.ddlutils.platform.interbase.InterbasePlatform;
 import org.apache.ddlutils.platform.mckoi.MckoiPlatform;
 import org.apache.ddlutils.platform.mssql.MSSqlPlatform;
+import org.apache.ddlutils.platform.mysql.MySql50Platform;
 import org.apache.ddlutils.platform.mysql.MySqlPlatform;
 import org.apache.ddlutils.platform.oracle.Oracle8Platform;
 import org.apache.ddlutils.platform.postgresql.PostgreSqlPlatform;
@@ -202,7 +203,7 @@ public class PlatformUtils
         jdbcDriverToPlatform.put(PlatformUtils.JDBC_DRIVER_DATADIRECT_SQLSERVER,  MSSqlPlatform.DATABASENAME);
         jdbcDriverToPlatform.put(PlatformUtils.JDBC_DRIVER_INET_SQLSERVER,        MSSqlPlatform.DATABASENAME);
         jdbcDriverToPlatform.put(PlatformUtils.JDBC_DRIVER_JSQLCONNECT_SQLSERVER, MSSqlPlatform.DATABASENAME);
-        jdbcDriverToPlatform.put(MySqlPlatform.JDBC_DRIVER,                       MySqlPlatform.DATABASENAME);
+        jdbcDriverToPlatform.put(MySqlPlatform.JDBC_DRIVER,                       MySql50Platform.DATABASENAME);
         jdbcDriverToPlatform.put(MySqlPlatform.JDBC_DRIVER_OLD,                   MySqlPlatform.DATABASENAME);
         jdbcDriverToPlatform.put(Oracle8Platform.JDBC_DRIVER,                     Oracle8Platform.DATABASENAME);
         jdbcDriverToPlatform.put(Oracle8Platform.JDBC_DRIVER_OLD,                 Oracle8Platform.DATABASENAME);
