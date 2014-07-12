@@ -143,6 +143,7 @@ public class MSSqlModelReader extends JdbcModelReader
      */
     private boolean existsPKWithName(DatabaseMetaDataWrapper metaData, Table table, String name) throws SQLException
     {
+	boolean result = false;
         ResultSet pks = null;
 
         try
@@ -153,15 +154,17 @@ public class MSSqlModelReader extends JdbcModelReader
             {
                 if (name.equals(pks.getString("PK_NAME")))
                 {
-                    return true;
+                    result = true;
+                    break;
                 }
             }
-            return false;
         }
         finally
         {
             closeResultSet(pks);
         }
+        
+        return result;
     }
     
     /**

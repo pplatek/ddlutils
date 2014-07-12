@@ -33,49 +33,44 @@ import org.apache.ddlutils.platform.DatabaseMetaDataWrapper;
  *
  * @version $Revision: $
  */
-public class Oracle10ModelReader extends Oracle8ModelReader
-{
+public class Oracle10ModelReader extends Oracle8ModelReader {
     /**
      * Creates a new model reader for Oracle 10 databases.
      * 
-     * @param platform The platform that this model reader belongs to
+     * @param platform
+     *            The platform that this model reader belongs to
      */
-    public Oracle10ModelReader(Platform platform)
-    {
-        super(platform);
+    public Oracle10ModelReader(Platform platform) {
+	super(platform);
     }
 
     /**
      * {@inheritDoc}
      */
-	protected Table readTable(DatabaseMetaDataWrapper metaData, Map values) throws SQLException
-	{
-		// Oracle 10 added the recycle bin which contains dropped database objects not yet purged
-		// Since we don't want entries from the recycle bin, we filter them out
-	    final String query = "SELECT * FROM RECYCLEBIN WHERE OBJECT_NAME=?";
+    protected Table readTable(DatabaseMetaDataWrapper metaData, Map values) throws SQLException {
+	// Oracle 10 added the recycle bin which contains dropped database
+	// objects not yet purged
+	// Since we don't want entries from the recycle bin, we filter them out
+	final String query = "SELECT * FROM RECYCLEBIN WHERE OBJECT_NAME=?";
 
-	    PreparedStatement stmt       = null;
-        boolean           deletedObj = false;
+	PreparedStatement stmt = null;
+	boolean deletedObj = false;
 
-        try
-        {
-        	stmt = getConnection().prepareStatement(query);
-        	stmt.setString(1, (String)values.get("TABLE_NAME"));
-        	
-        	ResultSet rs = stmt.executeQuery();
+	try {
+	    stmt = getConnection().prepareStatement(query);
+	    stmt.setString(1, (String) values.get("TABLE_NAME"));
 
-        	if (rs.next())
-        	{
-        		// we found the table in the recycle bin, so its a deleted one which we ignore
-        		deletedObj = true;
-        	}
-        }
-        finally
-        {
-            closeStatement(stmt);
-        }
+	    ResultSet rs = stmt.executeQuery();
 
-        return deletedObj ? null : super.readTable(metaData, values);
+	    if (rs.next()) {
+		// we found the table in the recycle bin, so its a deleted one
+		// which we ignore
+		deletedObj = true;
+	    }
+	} finally {
+	    closeStatement(stmt);
 	}
 
+	return deletedObj ? null : super.readTable(metaData, values);
+    }
 }

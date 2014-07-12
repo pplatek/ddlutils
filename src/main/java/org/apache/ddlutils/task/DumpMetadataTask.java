@@ -327,7 +327,8 @@ public class DumpMetadataTask extends Task
     {
         try
         {
-            addProperty(xmlWriter, getPropertyName(propGetter.getName()), propGetter.invoke(obj, null));
+            Object[] emptyObj = new Object[0];
+            addProperty(xmlWriter, getPropertyName(propGetter.getName()), propGetter.invoke(obj, emptyObj));
         }
         catch (Throwable ex)
         {

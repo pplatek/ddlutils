@@ -30,6 +30,9 @@ import org.apache.ddlutils.util.StringUtilsExt;
  */
 public abstract class IndexImplBase implements Index
 {
+    /** Unique ID for serialization purposes. */
+    private static final long serialVersionUID = -657674397502852829L;
+    
     /** The name of the index. */
     protected String    _name;
     /** The columns making up the index. */

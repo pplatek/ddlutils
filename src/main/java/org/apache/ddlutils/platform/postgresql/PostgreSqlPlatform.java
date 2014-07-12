@@ -67,6 +67,7 @@ public class PostgreSqlPlatform extends PlatformImplBase
         PlatformInfo info = getPlatformInfo();
 
         info.setPrimaryKeyColumnAutomaticallyRequired(true);
+        info.setTableNameInIndexes(true);
         // this is the default length though it might be changed when building PostgreSQL
         // in file src/include/postgres_ext.h
         info.setMaxIdentifierLength(31);
@@ -102,8 +103,6 @@ public class PostgreSqlPlatform extends PlatformImplBase
 
         setSqlBuilder(new PostgreSqlBuilder(this));
         setModelReader(new PostgreSqlModelReader(this));
-        
-        info.setTableNameInIndexes(true);
     }
 
     /**

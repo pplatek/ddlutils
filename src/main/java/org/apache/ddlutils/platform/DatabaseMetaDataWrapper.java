@@ -33,9 +33,9 @@ public class DatabaseMetaDataWrapper
     private final Pattern searchStringPattern = Pattern.compile("[_%]");
     /** The database meta data. */
     private DatabaseMetaData _metaData;
-    /** The catalog to acess in the database. */
+    /** The catalog to access in the database. */
     private String _catalog;
-    /** The schema(s) to acess in the database. */
+    /** The schema(s) to access in the database. */
     private String _schemaPattern;
     /** The table types to process. */
     private String[] _tableTypes;
