@@ -39,6 +39,7 @@ import org.apache.ddlutils.platform.mckoi.MckoiPlatform;
 import org.apache.ddlutils.platform.mssql.MSSqlPlatform;
 import org.apache.ddlutils.platform.mysql.MySql50Platform;
 import org.apache.ddlutils.platform.mysql.MySqlPlatform;
+import org.apache.ddlutils.platform.oracle.Oracle11Platform;
 import org.apache.ddlutils.platform.oracle.Oracle8Platform;
 import org.apache.ddlutils.platform.postgresql.PostgreSqlPlatform;
 import org.apache.ddlutils.platform.sapdb.SapDbPlatform;
@@ -171,7 +172,8 @@ public class PlatformUtils
         jdbcSubProtocolToPlatform.put(PlatformUtils.JDBC_SUBPROTOCOL_JSQLCONNECT_SQLSERVER,     MSSqlPlatform.DATABASENAME);
         jdbcSubProtocolToPlatform.put(PlatformUtils.JDBC_SUBPROTOCOL_JTDS_SQLSERVER,            MSSqlPlatform.DATABASENAME);
         jdbcSubProtocolToPlatform.put(MySqlPlatform.JDBC_SUBPROTOCOL,                           MySqlPlatform.DATABASENAME);
-        jdbcSubProtocolToPlatform.put(Oracle8Platform.JDBC_SUBPROTOCOL_THIN,                    Oracle8Platform.DATABASENAME);
+        jdbcSubProtocolToPlatform.put(Oracle11Platform.JDBC_SUBPROTOCOL_THIN,                   Oracle11Platform.DATABASENAME);
+        //jdbcSubProtocolToPlatform.put(Oracle8Platform.JDBC_SUBPROTOCOL_THIN,                    Oracle8Platform.DATABASENAME);
         jdbcSubProtocolToPlatform.put(Oracle8Platform.JDBC_SUBPROTOCOL_OCI8,                    Oracle8Platform.DATABASENAME);
         jdbcSubProtocolToPlatform.put(Oracle8Platform.JDBC_SUBPROTOCOL_THIN_OLD,                Oracle8Platform.DATABASENAME);
         jdbcSubProtocolToPlatform.put(PlatformUtils.JDBC_SUBPROTOCOL_DATADIRECT_ORACLE,         Oracle8Platform.DATABASENAME);
@@ -205,6 +207,7 @@ public class PlatformUtils
         jdbcDriverToPlatform.put(PlatformUtils.JDBC_DRIVER_JSQLCONNECT_SQLSERVER, MSSqlPlatform.DATABASENAME);
         jdbcDriverToPlatform.put(MySqlPlatform.JDBC_DRIVER,                       MySql50Platform.DATABASENAME);
         jdbcDriverToPlatform.put(MySqlPlatform.JDBC_DRIVER_OLD,                   MySqlPlatform.DATABASENAME);
+        jdbcDriverToPlatform.put(Oracle11Platform.JDBC_DRIVER,                    Oracle11Platform.DATABASENAME);
         jdbcDriverToPlatform.put(Oracle8Platform.JDBC_DRIVER,                     Oracle8Platform.DATABASENAME);
         jdbcDriverToPlatform.put(Oracle8Platform.JDBC_DRIVER_OLD,                 Oracle8Platform.DATABASENAME);
         jdbcDriverToPlatform.put(PlatformUtils.JDBC_DRIVER_DATADIRECT_ORACLE,     Oracle8Platform.DATABASENAME);

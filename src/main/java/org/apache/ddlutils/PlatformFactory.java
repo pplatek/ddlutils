@@ -21,7 +21,9 @@ package org.apache.ddlutils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.sql.DataSource;
+
 import org.apache.ddlutils.platform.axion.AxionPlatform;
 import org.apache.ddlutils.platform.cloudscape.CloudscapePlatform;
 import org.apache.ddlutils.platform.db2.Db2Platform;
@@ -36,6 +38,7 @@ import org.apache.ddlutils.platform.mssql.MSSqlPlatform;
 import org.apache.ddlutils.platform.mysql.MySqlPlatform;
 import org.apache.ddlutils.platform.mysql.MySql50Platform;
 import org.apache.ddlutils.platform.oracle.Oracle10Platform;
+import org.apache.ddlutils.platform.oracle.Oracle11Platform;
 import org.apache.ddlutils.platform.oracle.Oracle8Platform;
 import org.apache.ddlutils.platform.oracle.Oracle9Platform;
 import org.apache.ddlutils.platform.postgresql.PostgreSqlPlatform;
@@ -198,6 +201,7 @@ public class PlatformFactory
         addPlatform(_platforms, Oracle8Platform.DATABASENAME,     Oracle8Platform.class);
         addPlatform(_platforms, Oracle9Platform.DATABASENAME,     Oracle9Platform.class);
         addPlatform(_platforms, Oracle10Platform.DATABASENAME,    Oracle10Platform.class);
+        addPlatform(_platforms, Oracle11Platform.DATABASENAME,    Oracle11Platform.class);
         addPlatform(_platforms, PostgreSqlPlatform.DATABASENAME,  PostgreSqlPlatform.class);
         addPlatform(_platforms, SapDbPlatform.DATABASENAME,       SapDbPlatform.class);
         addPlatform(_platforms, SybasePlatform.DATABASENAME,      SybasePlatform.class);
