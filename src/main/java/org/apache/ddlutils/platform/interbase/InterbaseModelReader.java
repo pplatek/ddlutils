@@ -373,7 +373,7 @@ public class InterbaseModelReader extends JdbcModelReader
             "WHERE RDB$RELATION_NAME=? AND RDB$CONSTRAINT_TYPE=? AND RDB$INDEX_NAME=?";
 
         String            tableName = getPlatform().getSqlBuilder().getTableName(table);
-        String            indexName = getPlatform().getSqlBuilder().getIndexName(index);
+        String            indexName = getPlatform().getSqlBuilder().getIndexName(table, index);
         PreparedStatement stmt      = null;
 
         try 
@@ -403,7 +403,7 @@ public class InterbaseModelReader extends JdbcModelReader
             "WHERE RDB$RELATION_NAME=? AND RDB$CONSTRAINT_TYPE=? AND RDB$CONSTRAINT_NAME=? AND RDB$INDEX_NAME=?";
 
         String            tableName = getPlatform().getSqlBuilder().getTableName(table);
-        String            indexName = getPlatform().getSqlBuilder().getIndexName(index);
+        String            indexName = getPlatform().getSqlBuilder().getIndexName(table, index);
         String            fkName    = getPlatform().getSqlBuilder().getForeignKeyName(table, fk);
         PreparedStatement stmt      = null;
 

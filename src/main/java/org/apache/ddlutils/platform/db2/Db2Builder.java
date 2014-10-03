@@ -117,7 +117,7 @@ public class Db2Builder extends SqlBuilder
         // Index names in DB2 are unique to a schema and hence Derby does not
         // use the ON <tablename> clause
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

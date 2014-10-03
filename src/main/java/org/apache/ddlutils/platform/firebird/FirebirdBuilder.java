@@ -208,7 +208,7 @@ public class FirebirdBuilder extends SqlBuilder
         // Index names in Firebird are unique to a schema and hence Firebird does not
         // use the ON <tablename> clause
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

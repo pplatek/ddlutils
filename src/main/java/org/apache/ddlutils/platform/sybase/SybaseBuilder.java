@@ -220,7 +220,7 @@ public class SybaseBuilder extends SqlBuilder
         print("DROP INDEX ");
         printIdentifier(getTableName(table));
         print(".");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

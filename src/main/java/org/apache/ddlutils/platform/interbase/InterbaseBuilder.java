@@ -102,7 +102,7 @@ public class InterbaseBuilder extends SqlBuilder
         // Index names in Interbase are unique to a schema and hence we do not
         // need the ON <tablename> clause
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

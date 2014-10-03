@@ -78,7 +78,7 @@ public class DerbyBuilder extends CloudscapeBuilder
         // Index names in Derby are unique to a schema and hence Derby does not
         // use the ON <tablename> clause
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

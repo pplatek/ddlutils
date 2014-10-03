@@ -247,7 +247,7 @@ public class Oracle8Builder extends SqlBuilder
         // Index names in Oracle are unique to a schema and hence Oracle does not
         // use the ON <tablename> clause
         print("DROP INDEX ");
-        printIdentifier(getIndexName(index));
+        printIdentifier(getIndexName(table, index));
         printEndOfStatement();
     }
 

@@ -1804,7 +1804,7 @@ public abstract class SqlBuilder
     		indexName = tableName + "_" + indexName;
         }
         
-        return indexName;
+        return shortenName(indexName, getMaxConstraintNameLength());
     }
 
     /**
@@ -1835,7 +1835,7 @@ public abstract class SqlBuilder
         if ((index.getName() != null) && (index.getName().length() > 0))
         {
             print(" CONSTRAINT ");
-            printIdentifier(getIndexName(index));
+            printIdentifier(getIndexName(table, index));
         }
         if (index.isUnique())
         {
